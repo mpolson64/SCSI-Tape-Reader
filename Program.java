@@ -2,11 +2,12 @@ import lejos.nxt.*;
 import lejos.util.*;
 
 public abstract class Program {
-    private Card card;
+    protected Card[] cards;
 
-    public Program(Card card) {
-        this.card = card;
+    public Program() {
+        
     }
-
+	
+	public abstract void request();
     public abstract void run();
 }

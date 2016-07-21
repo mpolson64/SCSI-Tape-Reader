@@ -42,8 +42,6 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
 	
 	public int getMacro() {
         return binaryRead(filteredScan);
-		
-		
     }
 
 
