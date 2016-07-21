@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Card implements OperationCard, NumberCard {
+public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     private ArrayList<Boolean> filteredScan;
 
     public Card(RawScan scan) {
@@ -39,6 +39,13 @@ public class Card implements OperationCard, NumberCard {
     public int getNumber() {
         return binaryRead(filteredScan);
     }
+	
+	public int getMacro() {
+        return binaryRead(filteredScan);
+		
+		
+    }
+
 
     public byte[] getNotes() {
         ArrayList<Byte> temp0 = new ArrayList<Byte>();
