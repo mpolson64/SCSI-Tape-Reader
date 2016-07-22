@@ -7,6 +7,10 @@ public class RawScan {
         this.chan0 = chan0;
         this.chan1 = chan1;
     }
+	
+	public RawScan() {
+		
+	}
 
     public ArrayList<Integer> getChan0() {
         return chan0;

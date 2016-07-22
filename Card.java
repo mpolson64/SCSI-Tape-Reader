@@ -5,6 +5,8 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     private ArrayList<Boolean> filteredScan;
 
     public Card(RawScan scan) {
+		filteredScan = new ArrayList<Boolean>();
+		
         int sum0 = 0;
         for(int i = 0; i < scan.getChan0().size(); i++) {
             sum0 += scan.getChan0().get(i);
@@ -17,23 +19,20 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
         int mid0 = sum0 / scan.getChan0().size();
         int mid1 = sum1 / scan.getChan1().size();
 
-        for(int i = 0; i < scan.getChan0().size() * 2; i++) {
-            if(i % 2 == 0) {
-                if(scan.getChan0().get(i) > mid0) {
-                    filteredScan.add(false);
-                }
-                else {
-                    filteredScan.add(true);
-                }
-            }
-            else {
-                if(scan.getChan1().get(i) > mid1) {
-                    filteredScan.add(false);
-                }
-                else {
-                    filteredScan.add(true);
-                }
-            }
+        for(int i = 0; i < scan.getChan0().size(); i++) {
+			if(scan.getChan0().get(i) > mid0) {
+				filteredScan.add(false);
+			}
+			else {
+				filteredScan.add(true);
+			}
+
+			if(scan.getChan1().get(i) > mid1) {
+				filteredScan.add(false);
+			}
+			else {
+				filteredScan.add(true);
+			}
         }
     }
 
@@ -117,5 +116,13 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
         return out;
     }
 
-
+	public String toString() {
+		String out = "";
+		
+		for(int i = 0; i < filteredScan.size(); i++) {
+			out += filteredScan.get(i).toString();
+		}
+		
+		return out;
+	}
 }
