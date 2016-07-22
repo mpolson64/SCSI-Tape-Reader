@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import cards.*;
 
 public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     private ArrayList<Boolean> filteredScan;

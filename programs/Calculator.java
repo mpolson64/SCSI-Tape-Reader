@@ -1,3 +1,5 @@
+package programs;
+
 public class Calculator extends Program {
 	private int number0, number1;
 	private byte operation;
