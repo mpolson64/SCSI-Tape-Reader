@@ -13,6 +13,7 @@ public class Engine {
 	private static LightSensor chan1 = new LightSensor(SensorPort.S2);
 	
 	private static TouchSensor feedButton = new TouchSensor(SensorPort.S4);
+	private static TouchSensor scanButton = new TouchSensor(SensorPort.S3);
 	
 	private static String state = "IDLE";	//IDLE, SCANNING
 	
@@ -47,19 +48,24 @@ public class Engine {
 		Motor.A.forward();
 		Motor.B.forward();
 		
-		state = "IDLE";
+		if(!feedButton.isPressed()) {
+			state = "IDLE";
+		}
 	}
 	
 	private static void display() {
 		Program display = new Display();
 		display.request();
+		display.run();
+		
+		state = "IDLE";
 	}
 	
 	private static void idle() {
 		Motor.A.setSpeed(0);
 		Motor.B.setSpeed(0);
 		
-		if (Button.ENTER.isDown() && feedButton.isPressed()){
+		if (scanButton.isPressed()){
 			state = "DISPLAY";
 		}
 		else if (feedButton.isPressed()){

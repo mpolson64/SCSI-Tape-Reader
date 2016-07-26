@@ -12,16 +12,25 @@ public abstract class Program {
 	private LightSensor chan1;
 	private TouchSensor scanButton;
 	
+	private ArrayList<Integer> read0, read1;
+	
     protected Card[] cards;
 
     public Program() {
+		RConsole.println("Begin Program constructor");
         chan0 = new ColorSensor(SensorPort.S1);
 		chan1 = new LightSensor(SensorPort.S2);
 		scanButton = new TouchSensor(SensorPort.S3);
+		
+		read0 = new ArrayList<Integer>();
+		read1 = new ArrayList<Integer>();
     }
 	
 	protected int[] read() {
 		int[] temp = new int[2];
+		
+		temp[0] = chan0.getLightValue();
+		temp[1] = chan1.readValue();
 		
 		Motor.A.setSpeed((int)(((360 * BOX_SIZE) / CIRCUMFERENCE) / SCAN_TIME));
 		Motor.B.setSpeed((int)(((360 * BOX_SIZE) / CIRCUMFERENCE) / SCAN_TIME));
@@ -34,22 +43,19 @@ public abstract class Program {
 		Motor.A.stop();
 		Motor.B.stop();
 		
-		temp[0] = chan0.getLightValue();
-		temp[1] = chan1.readValue();
-		
 		return temp;
 	}
 	
 	protected RawScan generateRawScan() {
-		ArrayList<Integer> chan0 = new ArrayList<Integer>(), chan1 = new ArrayList<Integer>();
+		RConsole.println("Begin generateRawScan()");
 		
 		while(scanButton.isPressed()) {
 			int[] temp = read();
-			chan0.add(temp[0]);
-			chan1.add(temp[1]);
+			read0.add(temp[0]);
+			read1.add(temp[1]);
 		}
-		RConsole.println("Size = " + chan0.size() + " " + chan1.size());
-		return new RawScan(chan0, chan1);
+		RConsole.println("Size = " + read0.size() + " " + read1.size());
+		return new RawScan(read0, read1);
 	}
 	
 	public abstract void request();

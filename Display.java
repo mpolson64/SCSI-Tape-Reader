@@ -12,6 +12,7 @@ public class Display extends Program {
 	}
 	
 	public void run() {
+		LCD.clear();
 	    LCD.drawString(cards[0].toString(), 0, 0);	
 	}
 }

@@ -20,14 +20,14 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
         int mid1 = sum1 / scan.getChan1().size();
 
         for(int i = 0; i < scan.getChan0().size(); i++) {
-			if(scan.getChan0().get(i) > mid0) {
+			if(scan.getChan0().get(i) < mid0) {
 				filteredScan.add(false);
 			}
 			else {
 				filteredScan.add(true);
 			}
 
-			if(scan.getChan1().get(i) > mid1) {
+			if(scan.getChan1().get(i) < mid1) {
 				filteredScan.add(false);
 			}
 			else {
@@ -120,7 +120,12 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
 		String out = "";
 		
 		for(int i = 0; i < filteredScan.size(); i++) {
-			out += filteredScan.get(i).toString();
+			if(filteredScan.get(i)) {
+				out += "1";
+			}
+			else {
+				out += "0";
+			}
 		}
 		
 		return out;
