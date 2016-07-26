@@ -9,7 +9,7 @@ public abstract class Program {
 	private final double SCAN_TIME = 1;					//sec
 
 	private LightSensor chan0, chan1;
-	private TouchSensor scanButton;
+	private TouchSensor scanButton, feedButton;
 	
 	private ArrayList<Integer> read0, read1;
 	
@@ -20,10 +20,24 @@ public abstract class Program {
         chan0 = new LightSensor(SensorPort.S1);
 		chan1 = new LightSensor(SensorPort.S2);
 		scanButton = new TouchSensor(SensorPort.S3);
+		feedButton = new TouchSensor(SensorPort.S4);
 		
 		read0 = new ArrayList<Integer>();
 		read1 = new ArrayList<Integer>();
     }
+	
+	protected void feed() {
+		Motor.A.setSpeed(180);
+		Motor.B.setSpeed(180);
+		
+		Motor.A.forward();
+		Motor.B.forward();
+	}
+	
+	protected void stop() {
+		Motor.A.stop();
+		Motor.B.stop();
+	}
 	
 	protected int[] read() {
 		int[] temp = new int[2];
@@ -48,11 +62,24 @@ public abstract class Program {
 	protected RawScan generateRawScan() {
 		RConsole.println("Begin generateRawScan()");
 		
+		while(!feedButton.isPressed());
+		
+		while(!scanButton.isPressed()) {
+			if(feedButton.isPressed()) {
+				feed();
+			}
+			else {
+				stop();
+			}
+		}
+		
+		
 		while(scanButton.isPressed()) {
 			int[] temp = read();
 			read0.add(temp[0]);
 			read1.add(temp[1]);
 		}
+		
 		RConsole.println("Size = " + read0.size() + " " + read1.size());
 		return new RawScan(read0, read1);
 	}

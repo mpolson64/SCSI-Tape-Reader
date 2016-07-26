@@ -8,23 +8,23 @@ public class Engine {
 	private static TouchSensor feedButton = new TouchSensor(SensorPort.S4);
 	private static TouchSensor scanButton = new TouchSensor(SensorPort.S3);
 	
-	private static String state = "IDLE";	//IDLE, SCANNING
+	private static String state = "MENU";	//IDLE, SCANNING
 	
 	private static Card lastCard = null;
 	
 	public static void main(String[] args) {
 		RConsole.open();
-		RConsole.println("Hello from robot");
+		RConsole.println("Comms open");
 		while (true){
 			switch(state) {
 				case "IDLE":
 					idle();
 					break;
-				case "FEEDING":
-					feed();
-					break;
 				case "DISPLAY":
 					display();
+					break;
+				case "MENU":
+					menu();
 					break;
 				default:
 				
@@ -34,24 +34,12 @@ public class Engine {
 		}
 	}
 	
-	private static void feed() {
-		Motor.A.setSpeed(180);
-		Motor.B.setSpeed(180);
-		
-		Motor.A.forward();
-		Motor.B.forward();
-		
-		if(!feedButton.isPressed()) {
-			state = "IDLE";
-		}
-	}
-	
 	private static void display() {
 		Program display = new Display();
 		display.request();
 		display.run();
 		
-		state = "IDLE";
+		state = "MENU";
 	}
 	
 	private static void idle() {
@@ -61,8 +49,30 @@ public class Engine {
 		if (scanButton.isPressed()){
 			state = "DISPLAY";
 		}
-		else if (feedButton.isPressed()){
-			state = "FEEDING";
+	}
+	
+	private static void menu() {
+		String[] modes = {"DISPLAY"};
+		int selected = 0;
+		
+		LCD.clear();
+		LCD.drawString(modes[selected], 0, 3);
+		
+		if (Button.RIGHT.isDown()) {
+			selected += 1;
+		}
+		else if (Button.LEFT.isDown()) {
+			selected -= 1;
+		}
+		if(selected < 0) {
+			selected = modes.length - 1;
+		}
+		else if(selected == modes.length) {
+			selected = 0;
+		}
+		
+		if(Button.ENTER.isDown()) {
+			state = modes[selected];
 		}
 	}
 }
