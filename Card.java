@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import cards.*;
 
 public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
-    private ArrayList<Boolean> filteredScan;
+    private ArrayList < Boolean > filteredScan;
 
     public Card(RawScan scan) {
 		filteredScan = new ArrayList<Boolean>();
@@ -36,32 +36,25 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
         }
     }
 
-    public ArrayList<Boolean> getScan() {
-        return filteredScan;
-    }
-
-    public int binaryRead(ArrayList<Boolean> list) {
+    public int binaryRead(ArrayList < Boolean > list) {
         int number = 0;
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i)) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i)) {
                 number += Math.pow(i, 2);
-            } 
+            }
         }
         return number;
     }
 
-    public byte getOperation() {    //0: add, 1:subtract, 2: multiply, 3: divide
-        if (filteredScan.get(0) == false && filteredScan.get(1) == false){
+    public byte getOperation() { //0: add, 1:subtract, 2: multiply, 3: divide
+        if (filteredScan.get(0) == false && filteredScan.get(1) == false) {
             return 0;
-        }
-        else if (filteredScan.get(0) == false && filteredScan.get(1) == true){
+        } else if (filteredScan.get(0) == false && filteredScan.get(1) == true) {
             return 1;
 
-        }
-        else if (filteredScan.get(0) == true && filteredScan.get(1) == false){
+        } else if (filteredScan.get(0) == true && filteredScan.get(1) == false) {
             return 2;
-        }
-        else {
+        } else {
             return 3;
         }
     }
@@ -76,20 +69,20 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
 
 
     public byte[] getNotes() {
-        ArrayList<Byte> temp0 = new ArrayList<Byte>();
+        ArrayList < Byte > temp0 = new ArrayList < Byte > ();
 
-        for(int i = 0; i < filteredScan.size(); i += 2) {
-            ArrayList<Boolean> temp1 = new ArrayList<Boolean>();
-            for(int j = 0; j < 4; j++) {
+        for (int i = 0; i < filteredScan.size(); i += 2) {
+            ArrayList < Boolean > temp1 = new ArrayList < Boolean > ();
+            for (int j = 0; j < 4; j++) {
                 temp1.add(filteredScan.get(i));
             }
-            temp0.add((byte)binaryRead(temp1));
+            temp0.add((byte) binaryRead(temp1));
         }
 
         byte[] out = new byte[filteredScan.size() / 2];
 
 
-        for(int i = 0; i < out.length; i++) {
+        for (int i = 0; i < out.length; i++) {
             out[i] = temp0.get(i);
         }
 
@@ -97,37 +90,36 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     }
 
     public byte[] getTimings() {
-        ArrayList<Byte> temp0 = new ArrayList<Byte>();
+        ArrayList < Byte > temp0 = new ArrayList < Byte > ();
 
-        for(int i = 1; i < filteredScan.size(); i += 2) {
-            ArrayList<Boolean> temp1 = new ArrayList<Boolean>();
-            for(int j = 0; j < 4; j++) {
+        for (int i = 1; i < filteredScan.size(); i += 2) {
+            ArrayList < Boolean > temp1 = new ArrayList < Boolean > ();
+            for (int j = 0; j < 4; j++) {
                 temp1.add(filteredScan.get(i));
             }
-            temp0.add((byte)binaryRead(temp1));
+            temp0.add((byte) binaryRead(temp1));
         }
 
         byte[] out = new byte[filteredScan.size() / 2];
 
-        for(int i = 0; i < out.length; i++) {
+        for (int i = 0; i < out.length; i++) {
             out[i] = temp0.get(i);
         }
 
         return out;
     }
 
-	public String toString() {
-		String out = "";
-		
-		for(int i = 0; i < filteredScan.size(); i++) {
-			if(filteredScan.get(i)) {
-				out += "1";
-			}
-			else {
-				out += "0";
-			}
-		}
-		
-		return out;
-	}
+    public String toString() {
+        String out = new String();
+
+        for (int i = 0; i < filteredScan.size(); i++) {
+            if (filteredScan.get(i)) {
+                out += "1";
+            } else {
+                out += "0";
+            }
+        }
+
+        return out;
+    }
 }
