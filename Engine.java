@@ -43,9 +43,8 @@ public class Engine {
         display.request();
         display.run();
 
-        state = "MENU";
-		
 		while (!Button.ENTER.isDown());
+        state = "MENU";
     }
 
     private static void idle() {
