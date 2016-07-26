@@ -5,11 +5,10 @@ import lejos.nxt.comm.*;
 
 public abstract class Program {
 	private final double CIRCUMFERENCE = 3.0 * Math.PI;	//cm
-	private final double BOX_SIZE = 1.5;					//cm
+	private final double BOX_SIZE = 1.5;				//cm
 	private final double SCAN_TIME = 1;					//sec
-	
-	private ColorSensor chan0;
-	private LightSensor chan1;
+
+	private LightSensor chan0, chan1;
 	private TouchSensor scanButton;
 	
 	private ArrayList<Integer> read0, read1;
@@ -18,7 +17,7 @@ public abstract class Program {
 
     public Program() {
 		RConsole.println("Begin Program constructor");
-        chan0 = new ColorSensor(SensorPort.S1);
+        chan0 = new LightSensor(SensorPort.S1);
 		chan1 = new LightSensor(SensorPort.S2);
 		scanButton = new TouchSensor(SensorPort.S3);
 		

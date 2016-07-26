@@ -4,14 +4,7 @@ import lejos.nxt.*;
 import lejos.util.*;
 import lejos.nxt.comm.*;
 
-public class Engine {
-	private static final double CIRCUMFERENCE = 3.0 * Math.PI;	//cm
-	private static final double BOX_SIZE = 1.5;					//cm
-	private static final double SCAN_TIME = 1;					//sec
-	
-	private static ColorSensor chan0 = new ColorSensor(SensorPort.S1);
-	private static LightSensor chan1 = new LightSensor(SensorPort.S2);
-	
+public class Engine {	
 	private static TouchSensor feedButton = new TouchSensor(SensorPort.S4);
 	private static TouchSensor scanButton = new TouchSensor(SensorPort.S3);
 	
