@@ -4,7 +4,6 @@ import lejos.nxt.LightSensor;
 import lejos.nxt.Motor;
 import lejos.nxt.TouchSensor;
 import lejos.nxt.SensorPort;
-import lejos.nxt.LCD;
 
 import lejos.util.Delay;
 

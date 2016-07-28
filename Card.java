@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-import java.util.*;
-import lejos.nxt.*;
 import lejos.nxt.comm.*;
-import lejos.util.*;
+import lejos.nxt.LCD;
 
 public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
-    private ArrayList < Boolean > filteredScan;
+    private ArrayList <Boolean> filteredScan;
 
     public Card(RawScan scan) {
 		filteredScan = new ArrayList<Boolean>();
@@ -56,7 +54,6 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
             return 0;
         } else if (filteredScan.get(0) == false && filteredScan.get(1) == true) {
             return 1;
-
         } else if (filteredScan.get(0) == true && filteredScan.get(1) == false) {
             return 2;
         } else {

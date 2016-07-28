@@ -13,7 +13,7 @@ public class Engine {
     private static TouchSensor feedButton = new TouchSensor(SensorPort.S4);
     private static TouchSensor scanButton = new TouchSensor(SensorPort.S3);
 
-    private static String state = "MENU"; //IDLE, MENU, DISPLAY
+    private static String state = "MENU"; //IDLE, MENU, DISPLAY, CALCULATOR
 	private static int selected = 0;
 	
     private static Card lastCard = null;
