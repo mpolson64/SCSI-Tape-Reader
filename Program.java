@@ -4,13 +4,14 @@ import lejos.nxt.LightSensor;
 import lejos.nxt.Motor;
 import lejos.nxt.TouchSensor;
 import lejos.nxt.SensorPort;
+import lejos.nxt.LCD;
 
 import lejos.util.Delay;
 
 public abstract class Program {
     private final double CIRCUMFERENCE = 3.0 * Math.PI; //cm
     private final double BOX_SIZE = 1.5; 				//cm
-    private final double SCAN_TIME = 1; 				//sec
+    private final double SCAN_TIME = 0.5; 				//sec
 
     private LightSensor chan0, chan1;
     private TouchSensor scanButton, feedButton;
@@ -45,7 +46,7 @@ public abstract class Program {
     private int[] read() {
         int[] temp = new int[2];
 
-        temp[0] = chan0.getLightValue();
+        temp[0] = chan0.readValue();
         temp[1] = chan1.readValue();
 
         Motor.A.setSpeed((int)(((360 * BOX_SIZE) / CIRCUMFERENCE) / SCAN_TIME));
@@ -63,6 +64,9 @@ public abstract class Program {
     }
 
     protected RawScan generateRawScan() {
+		read0.clear();
+		read1.clear();
+		
         while (!feedButton.isPressed()); //Wait until feed button is pressed before continuing
 
         while (!scanButton.isPressed()) {

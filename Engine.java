@@ -14,7 +14,8 @@ public class Engine {
     private static TouchSensor scanButton = new TouchSensor(SensorPort.S3);
 
     private static String state = "MENU"; //IDLE, MENU, DISPLAY
-
+	private static int selected = 0;
+	
     private static Card lastCard = null;
 
     public static void main(String[] args) {
@@ -31,6 +32,9 @@ public class Engine {
                 case "DISPLAY":
                     display();
                     break;
+				case "CALCULATOR":
+					calculator();
+					break;
                 default:
                     break;
             }
@@ -45,8 +49,19 @@ public class Engine {
 
 		while (!Button.ENTER.isDown());
         state = "MENU";
+		while (Button.ENTER.isDown());
     }
 
+	private static void calculator() {
+		Program calculator = new Calculator();
+		calculator.request();
+		calculator.run();
+		
+		while (!Button.ENTER.isDown());
+        state = "MENU";
+		while (Button.ENTER.isDown());
+	}
+	
     private static void idle() {
         Motor.A.setSpeed(0);
         Motor.B.setSpeed(0);
@@ -54,22 +69,26 @@ public class Engine {
 
     private static void menu() {
         String[] modes = {
-            "DISPLAY"
+            "DISPLAY",
+			"CALCULATOR"
         };
-        int selected = 0;
 
         LCD.clear();
         LCD.drawString(modes[selected], 0, 3);
 
         if (Button.RIGHT.isDown()) {
             selected += 1;
+			while(Button.RIGHT.isDown());
         } else if (Button.LEFT.isDown()) {
             selected -= 1;
+			while(Button.RIGHT.isDown());
         }
         if (selected < 0) {
             selected = modes.length - 1;
+			while(Button.RIGHT.isDown());
         } else if (selected == modes.length) {
             selected = 0;
+			while(Button.RIGHT.isDown());
         }
 
         if (Button.ENTER.isDown()) {

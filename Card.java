@@ -1,5 +1,8 @@
 import java.util.ArrayList;
-import cards.*;
+import java.util.*;
+import lejos.nxt.*;
+import lejos.nxt.comm.*;
+import lejos.util.*;
 
 public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     private ArrayList < Boolean > filteredScan;
@@ -18,29 +21,31 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
 
         int mid0 = sum0 / scan.getChan0().size();
         int mid1 = sum1 / scan.getChan1().size();
-
+		
         for(int i = 0; i < scan.getChan0().size(); i++) {
-			if(scan.getChan0().get(i) < mid0) {
-				filteredScan.add(false);
+			if(scan.getChan0().get(i) > mid0) {
+				filteredScan.add(0, false);
 			}
 			else {
-				filteredScan.add(true);
+				filteredScan.add(0, true);
 			}
-
-			if(scan.getChan1().get(i) < mid1) {
-				filteredScan.add(false);
+			LCD.clear();
+			
+			if(scan.getChan1().get(i) > mid1) {
+				filteredScan.add(0, false);
 			}
 			else {
-				filteredScan.add(true);
+				filteredScan.add(0, true);
 			}
+			LCD.clear();
         }
     }
 
     public int binaryRead(ArrayList < Boolean > list) {
         int number = 0;
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < filteredScan.size(); i++) {
             if (list.get(i)) {
-                number += Math.pow(i, 2);
+                number += Math.pow(2, filteredScan.size() - 1 - i);
             }
         }
         return number;
@@ -80,7 +85,6 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
         }
 
         byte[] out = new byte[filteredScan.size() / 2];
-
 
         for (int i = 0; i < out.length; i++) {
             out[i] = temp0.get(i);
