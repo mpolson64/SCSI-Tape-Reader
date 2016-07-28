@@ -30,16 +30,16 @@ public class Calculator extends Program {
 	public void run() {
 		double result;
 		String equation;
-		if(operation == 0) {
+		if (operation == 0) {
 			result = number0 + number1;
 			equation = number0 + " + " + number1;
 			
 		}
-		else if(operation == 1) {
+		else if (operation == 1) {
 			result = number0 - number1;
 			equation = number0 + " - " + number1;
 		}
-		else if(operation == 2) {
+		else if (operation == 2) {
 			result = number0 * number1;
 			equation = number0 + " * " + number1;
 		}
@@ -47,7 +47,6 @@ public class Calculator extends Program {
 			result = (double)number0 / number1;
 			equation = number0 + " / " + number1;
 		}
-		
 		
 		LCD.drawString(equation, 0, 0);
 		LCD.drawString((new Double(result)).toString(), 0, 2);

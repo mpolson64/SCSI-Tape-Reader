@@ -78,17 +78,17 @@ public class Engine {
 
         if (Button.RIGHT.isDown()) {
             selected += 1;
-			while(Button.RIGHT.isDown());
+			while (Button.RIGHT.isDown());
         } else if (Button.LEFT.isDown()) {
             selected -= 1;
-			while(Button.RIGHT.isDown());
+			while (Button.RIGHT.isDown());
         }
         if (selected < 0) {
             selected = modes.length - 1;
-			while(Button.RIGHT.isDown());
+			while (Button.RIGHT.isDown());
         } else if (selected == modes.length) {
             selected = 0;
-			while(Button.RIGHT.isDown());
+			while (Button.RIGHT.isDown());
         }
 
         if (Button.ENTER.isDown()) {

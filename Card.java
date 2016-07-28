@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import lejos.nxt.comm.*;
 import lejos.nxt.LCD;
 
 public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
@@ -21,7 +20,7 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
         int mid1 = sum1 / scan.getChan1().size();
 		
         for(int i = 0; i < scan.getChan0().size(); i++) {
-			if(scan.getChan0().get(i) > mid0) {
+			if (scan.getChan0().get(i) > mid0) {
 				filteredScan.add(0, false);
 			}
 			else {
@@ -29,7 +28,7 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
 			}
 			LCD.clear();
 			
-			if(scan.getChan1().get(i) > mid1) {
+			if (scan.getChan1().get(i) > mid1) {
 				filteredScan.add(0, false);
 			}
 			else {
