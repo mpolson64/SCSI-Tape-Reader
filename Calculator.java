@@ -12,7 +12,7 @@ public class Calculator extends Program {
 		LCD.clear();
 		LCD.drawString("NUMBER CARD #1", 0, 0);
 		cards[0] = new Card(generateRawScan());
-		LCD.drawString((new Integer(cards[0].getNumber())).toString(), 0, 1);
+		LCD.drawString((new Integer(cards[0].getNumber())).toString(), 0, 2);
 		LCD.drawString("NUMBER CARD #2", 0, 0);
 		cards[1] = new Card(generateRawScan());
 		LCD.drawString((new Integer(cards[1].getNumber())).toString(), 0, 2);

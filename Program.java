@@ -9,7 +9,7 @@ import lejos.util.Delay;
 
 public abstract class Program {
     private final double CIRCUMFERENCE = 3.0 * Math.PI; //cm
-    private final double BOX_SIZE = 1.5; 				//cm
+    private final double BOX_SIZE = 1.475; 				//cm
     private final double SCAN_TIME = 0.5; 				//sec
 
     private LightSensor chan0, chan1;

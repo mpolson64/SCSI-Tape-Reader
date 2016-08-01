@@ -49,11 +49,11 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     }
 
     public byte getOperation() { //0: add, 1:subtract, 2: multiply, 3: divide
-        if (filteredScan.get(0) == false && filteredScan.get(1) == false) {
+        if (filteredScan.get(filteredScan.size() - 1) == false && filteredScan.get(filteredScan.size() - 2) == false) {
             return 0;
-        } else if (filteredScan.get(0) == false && filteredScan.get(1) == true) {
+        } else if (filteredScan.get(filteredScan.size() - 1) == false && filteredScan.get(filteredScan.size() - 2) == true) {
             return 1;
-        } else if (filteredScan.get(0) == true && filteredScan.get(1) == false) {
+        } else if (filteredScan.get(filteredScan.size() - 1) == true && filteredScan.get(filteredScan.size() - 2) == false) {
             return 2;
         } else {
             return 3;
