@@ -1,23 +1,26 @@
 import lejos.nxt.LCD;
+import lejos.util.*;
 
 public class Music extends Program {
-	MusicCard card;
-	
+    MusicCard card;
+
     public Music() {
         cards = new Card[1];
     }
 
     public void request() {
-		LCD.clear();
-		LCD.drawString("CARD #1", 0, 0);
+        LCD.clear();
+        LCD.drawString("CARD #1", 0, 0);
         cards[0] = new Card(generateRawScan());
-		card = new MusicCard(cards[0]);
+        card = new MusicCard(cards[0]);
     }
 
     public void run() {
         LCD.clear();
-		Integer x = new Integer(cards[0].getNumber());
-		LCD.drawString(cards[0].toString(), 0, 0);
-		LCD.drawString(x.toString(), 0, 1);
+        System.out.println(card.getNotes());
+        Delay.msDelay(2000);
+    }
+
+    private void playNote(byte note, byte time) {
     }
 }

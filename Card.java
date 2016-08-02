@@ -5,8 +5,8 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     private ArrayList <Boolean> filteredScan;
 
     public Card(RawScan scan) {
-		filteredScan = new ArrayList<Boolean>();
-		
+        filteredScan = new ArrayList<Boolean>();
+
         int sum0 = 0;
         for(int i = 0; i < scan.getChan0().size(); i++) {
             sum0 += scan.getChan0().get(i);
@@ -18,23 +18,23 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
 
         int mid0 = sum0 / scan.getChan0().size();
         int mid1 = sum1 / scan.getChan1().size();
-		
+
         for(int i = 0; i < scan.getChan0().size(); i++) {
-			if (scan.getChan0().get(i) > mid0) {
-				filteredScan.add(0, false);
-			}
-			else {
-				filteredScan.add(0, true);
-			}
-			LCD.clear();
-			
-			if (scan.getChan1().get(i) > mid1) {
-				filteredScan.add(0, false);
-			}
-			else {
-				filteredScan.add(0, true);
-			}
-			LCD.clear();
+            if (scan.getChan0().get(i) > mid0) {
+                filteredScan.add(0, false);
+            }
+            else {
+                filteredScan.add(0, true);
+            }
+            LCD.clear();
+
+            if (scan.getChan1().get(i) > mid1) {
+                filteredScan.add(0, false);
+            }
+            else {
+                filteredScan.add(0, true);
+            }
+            LCD.clear();
         }
     }
 
@@ -65,7 +65,7 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     }
 
     public int getMacro() {
-		filteredScan.removeRange(4, filteredScan.size());
+        filteredScan.removeRange(4, filteredScan.size());
         return binaryRead(filteredScan);
     }
 
