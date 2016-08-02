@@ -35,6 +35,9 @@ public class Engine {
 				case "CALCULATOR":
 					calculator();
 					break;
+				case "MUSIC":
+					music();
+					break;
                 default:
                     break;
             }
@@ -62,6 +65,16 @@ public class Engine {
 		while (Button.ENTER.isDown());
 	}
 	
+	private static void music() {
+		Program music = new Music();
+		music.request();
+		music.run();
+		
+		while (!Button.ENTER.isDown());
+        state = "MENU";
+		while (Button.ENTER.isDown());
+	}
+	
     private static void idle() {
         Motor.A.setSpeed(0);
         Motor.B.setSpeed(0);
@@ -70,7 +83,8 @@ public class Engine {
     private static void menu() {
         String[] modes = {
             "DISPLAY",
-			"CALCULATOR"
+			"CALCULATOR",
+			"MUSIC"
         };
 
         LCD.clear();

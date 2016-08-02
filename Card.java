@@ -40,6 +40,13 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
 
     public int binaryRead(ArrayList < Boolean > list) {
         int number = 0;
+		/*
+			you are running the for loop for filteredScan.size() times
+			-> but you are getting an object from list
+			
+			filteredScan -> 10
+			list -> 5
+		*/
         for (int i = 0; i < filteredScan.size(); i++) {
             if (list.get(i)) {
                 number += Math.pow(2, filteredScan.size() - 1 - i);
@@ -65,7 +72,7 @@ public class Card implements OperationCard, NumberCard, MacroCard, MusicCard {
     }
 
     public int getMacro() {
-        filteredScan.removeRange(4, filteredScan.size());
+        //filteredScan.removeRange(4, filteredScan.size());
         return binaryRead(filteredScan);
     }
 
